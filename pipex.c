@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:37:10 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/12 18:41:48 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/12 18:42:52 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,5 @@
 // stores the parth in a variable after calling the function
 // if there is no path, you have to free the array of strings
 // launch and protect the execve function (if -1 then is error)
+
+// perrror, access???
