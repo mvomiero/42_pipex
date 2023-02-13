@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:12:00 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/13 16:59:38 by mvomiero         ###   ########.fr       */
+/*   Created: 2022/11/29 17:11:14 by mvomiero          #+#    #+#             */
+/*   Updated: 2022/11/29 17:16:52 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <string.h>
-# include <stdio.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-# include "libft.h"
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
 
-#endif
+/* int main(void)
+{
+	printf("%d\n", ft_isdigit('0'));
+	printf("%d\n", ft_isdigit('a'));
+	printf("%d\n", isdigit('0'));
+	printf("%d\n", isdigit('a'));
+} */

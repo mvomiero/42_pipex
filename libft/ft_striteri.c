@@ -1,24 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:12:00 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/13 16:59:38 by mvomiero         ###   ########.fr       */
+/*   Created: 2022/12/03 12:57:53 by mvomiero          #+#    #+#             */
+/*   Updated: 2022/12/03 13:26:13 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <string.h>
-# include <stdio.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-# include "libft.h"
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	unsigned int	i;
 
-#endif
+	i = 0;
+	while (s[i])
+	{
+		f(i, s + i);
+		i++;
+	}
+}
+
+/* void ft_string_op(unsigned int n, char *c)
+{
+	if (n % 5 == 0)
+	{
+		c[n] = '*';
+		if (c[n + 1])
+			c[n + 1] = '-';
+	}
+}
+
+int	main(void)
+{
+	char	str[] = "Buongiorno Buongiornissimo";
+	ft_striteri(str, &ft_string_op);
+	printf("%s\n", str);
+} */
