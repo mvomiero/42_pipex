@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:50:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/13 17:30:45 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:55:44 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,16 @@
 // and the command name (cmd, passed as argument of the function)
 // if you have access, you return the first path you encounter
 
-// **** EXECUTE (char *argv, char **envp)
-// stores ft_split of argv in array of strings (separator is ' ')
-// stores the parth in a variable after calling the function
-// if there is no path, you have to free the array of strings
-// launch and protect the execve function (if -1 then is error)
 
-// perror, access???
 
-static void	free_paths(char **paths)
+static void	free_array_strings(char **array)
 {
 	int	i;
 
 	i = 0;
-	while (paths[i])
-		free(paths[i++]);
-	free(paths);
+	while (array[i])
+		free(array[i++]);
+	free(array);
 }
 
 char	*find_path(char *cmd, char **envp)
@@ -61,5 +55,35 @@ char	*find_path(char *cmd, char **envp)
 		i++;
 	}
 	free(paths);
+	return (0);
+}
+
+void	error(void)
+{
+	perror("Error");
+	exit(1);
+}
+// **** EXECUTE (char *argv, char **envp)
+// stores ft_split of argv in array of strings (separator is ' ')
+// stores the parth in a variable after calling the function
+// if there is no path, you have to free the array of strings
+// launch and protect the execve function (if -1 then is error)
+
+// perror, access???
+
+void	execute(char *argv, char **envp)
+{
+	char	**cmd;
+	char	*path;
+
+	cmd = ft_split(argv, ' ');
+	path = find_path(cmd[0], envp);
+	if (!path)
+	{
+		free_array_strings(cmd);
+		error();
+	}
+	if (execve(path, cmd, envp) == -1)
+		error();
 }
 
