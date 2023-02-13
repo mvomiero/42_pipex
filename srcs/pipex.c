@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:37:10 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/13 14:39:30 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:43:25 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	parent_process(char **argv, char **envp, int *fd)
 	dup2(fd[0], STDIN_FILENO);
 	dup2(outfile, STDOUT_FILENO);
 	close(fd[1]);
-	execute(argv[4], envp);
+	execute(argv[3], envp);
 }
 
 // *** PARENT
@@ -82,18 +82,24 @@ int	main(int argc, char **argv, char **envp)
 	int		fd[2];
 	pid_t	pid1;
 	
+		//printf("completed\n");
 	if (argc == 5)
 	{
+		//printf("ciao\n");
 		if (pipe(fd) == -1)
 			error();
+		//printf("pipe done\n");
 		pid1 = fork();
 		if (pid1 == -1)
 			error();
 		if (pid1 == 0)
 			child_process(argv, envp, fd);
 		waitpid(pid1, NULL, 0);
+		//printf("chil process done\n");
 			parent_process(argv, envp, fd);
+		//printf("parent process done\n");
 	}
+	// still have to do the else statement
 }
 
 // **** FIND PATH (char *cmd, char **envp)

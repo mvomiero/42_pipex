@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:50:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/13 17:55:44 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:32:42 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ char	*find_path(char *cmd, char **envp)
 	i = 0;
 	while (paths[i])
 	{
-		path = ft_strjoin(paths[i], '/');
+		path = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(path, cmd);
 		if (access(path, F_OK) == 0)
 		{
-			free_paths(paths);
+			free_array_strings(paths);
 			return (path);
 		}
 		free(path);
