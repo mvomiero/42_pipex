@@ -1,6 +1,7 @@
 
 #BSRCS	= pipex_bonus.c utils_bonus.c
 SRCS	= srcs/pipex.c srcs/utils.c
+OBJS	= ${SRCS:.c=.o}
 NAME	= pipex
 CC	= cc
 FLAGS	= -Wall -Werror -Wextra 
@@ -17,11 +18,10 @@ ${NAME}: runlibft
 ignore: runlibft
 	${CC} ${FLAGS} -o ${NAME} ${SRCS} -I ${INCS} ${LIBFT}
 
-#bonus: runlibft 
-#	${CC} ${FLAGS} -o ${NAME} ${BSRCS} -I ${INCS} ${LIBFT}
-
 clean:
-	make -C libft fclean
+	make -C ./libft fclean
+	rm -f ${OBJS}
+
 
 fclean: clean
 	${RM} ${NAME}
@@ -35,7 +35,7 @@ runlibft:
 
 INFILE	= infile.txt
 OUTFILE	= outfile.txt
-IN_CMD	= "ls -l"
+IN_CMD	= "ciao"
 OUT_CMD	= "wc -l"
 IN_CMD_B	= $(IN_CMD:"%=%)
 IN_CMD_BA	= $(IN_CMD_B:%"=%)

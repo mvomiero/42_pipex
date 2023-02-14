@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:37:10 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/14 16:12:16 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:30:04 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ void	child_process(char **argv, char **envp, int *fd)
 
 	infile = open(argv[1], O_RDONLY, 0777);
 	if (infile == -1)
-		error();
+	{
+		perror(argv[1]);
+		exit(EXIT_FAILURE);
+	}
 	dup2(fd[1], STDOUT_FILENO);
 	dup2(infile, STDIN_FILENO);
 	close(fd[0]);

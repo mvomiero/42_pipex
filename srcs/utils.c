@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:50:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/14 16:12:51 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:33:22 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 // once it has the array of strings with all the paths, you have for each add / 
 // and the command name (cmd, passed as argument of the function)
 // if you have access, you return the first path you encounter
-
-
 
 static void	free_array_strings(char **array)
 {
@@ -60,7 +58,7 @@ char	*find_path(char *cmd, char **envp)
 
 void	error(void)
 {
-	perror("Error:");
+	perror("Error");
 	exit(EXIT_FAILURE);
 }
 // **** EXECUTE (char *argv, char **envp)
@@ -88,7 +86,6 @@ void	execute(char *argv, char **envp)
 	path = find_path(cmd[0], envp);
 	if (!path)
 	{
-		//free_array_strings(cmd);
 		cmd_not_found(cmd);
 	}
 	if (execve(path, cmd, envp) == -1)
