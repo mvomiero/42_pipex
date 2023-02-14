@@ -31,6 +31,7 @@ re: fclean all
 runlibft:
 	make bonus -C libft
 
+# *** TESTING
 
 INFILE	= infile.txt
 OUTFILE	= outfile.txt
