@@ -12,16 +12,12 @@ LIBFT	= -Llibft -lft
 
 all: ${NAME}
 
-${NAME}: runlibft 
-	${CC} ${FLAGS} -o ${NAME} ${SRCS} -I ${INCS} ${LIBFT}
-
-ignore: runlibft
+${NAME}: runlibft
 	${CC} ${FLAGS} -o ${NAME} ${SRCS} -I ${INCS} ${LIBFT}
 
 clean:
 	make -C ./libft fclean
 	rm -f ${OBJS}
-
 
 fclean: clean
 	${RM} ${NAME}
@@ -35,8 +31,8 @@ runlibft:
 
 INFILE	= infile.txt
 OUTFILE	= outfile.txt
-IN_CMD	= "ciao"
-OUT_CMD	= "wc -l"
+IN_CMD	= "cat"
+OUT_CMD	= "wc"
 IN_CMD_B	= $(IN_CMD:"%=%)
 IN_CMD_BA	= $(IN_CMD_B:%"=%)
 OUT_CMD_B	= $(OUT_CMD:"%=%)
@@ -45,6 +41,7 @@ OUT_CMD_BA	= $(OUT_CMD_B:%"=%)
 test: test_pipex test_bash
 
 test_pipex:
+	@touch infile.txt
 	@echo "**** TEST PIPEX ****"
 # - is to ignore if there is an error
 	-./pipex $(INFILE) $(IN_CMD) $(OUT_CMD) $(OUTFILE)
@@ -56,4 +53,4 @@ test_bash:
 	-< $(INFILE) $(IN_CMD_BA) | $(OUT_CMD_BA) > $(OUTFILE)
 	@cat outfile.txt
 
-.PHONY: all re clean fclean
+.PHONY: all re clean fclean test
