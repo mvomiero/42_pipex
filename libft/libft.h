@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:08:16 by mvomiero          #+#    #+#             */
-/*   Updated: 2022/12/09 18:35:41 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:47:24 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }				t_list;
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -73,6 +77,8 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+char	*get_next_line(int fd);
+
 
 #endif
 
