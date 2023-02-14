@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:50:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/14 12:07:49 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:12:51 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ char	*find_path(char *cmd, char **envp)
 
 void	error(void)
 {
-	perror("Error");
-	exit(1);
+	perror("Error:");
+	exit(EXIT_FAILURE);
 }
 // **** EXECUTE (char *argv, char **envp)
 // stores ft_split of argv in array of strings (separator is ' ')
@@ -70,6 +70,14 @@ void	error(void)
 // launch and protect the execve function (if -1 then is error)
 
 // perror, access???
+
+static void	cmd_not_found(char **cmd)
+{
+	write(2, cmd[0], ft_strlen(cmd[0]));
+	write(2, ": command not found\n", 20);
+	free_array_strings(cmd);
+	exit(EXIT_FAILURE);
+}
 
 void	execute(char *argv, char **envp)
 {
@@ -80,8 +88,8 @@ void	execute(char *argv, char **envp)
 	path = find_path(cmd[0], envp);
 	if (!path)
 	{
-		free_array_strings(cmd);
-		error();
+		//free_array_strings(cmd);
+		cmd_not_found(cmd);
 	}
 	if (execve(path, cmd, envp) == -1)
 		error();

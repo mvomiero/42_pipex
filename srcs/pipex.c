@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:37:10 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/14 12:07:31 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:12:16 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,12 @@ int	main(int argc, char **argv, char **envp)
 			parent_process(argv, envp, fd);
 		//printf("parent process done\n");
 	}
+	else
+	{
+		ft_putstr_fd("Error: Bad arguments\n", 2);
+		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
+	}
+	return (0);
 	// still have to do the else statement
 }
 

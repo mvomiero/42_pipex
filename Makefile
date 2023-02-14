@@ -3,7 +3,8 @@
 SRCS	= srcs/pipex.c srcs/utils.c
 NAME	= pipex
 CC	= cc
-FLAGS	= -Wall -Werror -Wextra -fsanitize=address
+FLAGS	= -Wall -Werror -Wextra 
+#-fsanitize=address
 RM	= rm -f
 INCS	= libft/includes
 LIBFT	= -Llibft -lft
@@ -29,5 +30,29 @@ re: fclean all
 
 runlibft:
 	make bonus -C libft
+
+
+INFILE	= infile.txt
+OUTFILE	= outfile.txt
+IN_CMD	= ls -l
+OUT_CMD	= wc -l
+IN_CMD_BA	= $(addsuffix ",$(IN_CMD))
+IN_CMD_B	= $(addprefix ",$(IN_CMD_BA))
+OUT_CMD_BA	= $(addsuffix ",$(OUT_CMD))
+OUT_CMD_B	= $(addprefix ",$(OUT_CMD_BA))
+
+test: test_pipex test_bash
+
+test_pipex:
+	@echo "* TEST PIPEX *"
+# - is to ignore if there is an error
+	-./pipex $(INFILE) $(IN_CMD_B) $(OUT_CMD_B) $(OUTFILE)
+	@cat outfile.txt
+
+test_bash:
+	@echo "* TEST BASH *"
+# - is to ignore if there is an error
+	-< $(INFILE) $(IN_CMD) | $(OUT_CMD) > $(OUTFILE)
+	@cat outfile.txt
 
 .PHONY: all re clean fclean
