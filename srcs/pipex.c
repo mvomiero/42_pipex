@@ -6,11 +6,11 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:37:10 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/13 18:43:25 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/14 12:07:31 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 // fd [0] ---> STDIN  ---> here is read
 // fd [1] ---> STDOUT ---> here is written

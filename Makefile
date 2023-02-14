@@ -1,42 +1,33 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/02/13 18:00:23 by mvomiero          #+#    #+#              #
-#    Updated: 2023/02/13 18:21:37 by mvomiero         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-PIPEX	= pipex
-
+#BSRCS	= pipex_bonus.c utils_bonus.c
 SRCS	= srcs/pipex.c srcs/utils.c
-OBJS	= ${SRCS:.c=.o}
-MAIN	= srcs/pipex.c
+NAME	= pipex
+CC	= cc
+FLAGS	= -Wall -Werror -Wextra -fsanitize=address
+RM	= rm -f
+INCS	= libft/includes
+LIBFT	= -Llibft -lft
 
-INCS	= -I ./includes/
+all: ${NAME}
 
-CFLAGS	= -Wall -Wextra -Werror
+${NAME}: runlibft 
+	${CC} ${FLAGS} -o ${NAME} ${SRCS} -I ${INCS} ${LIBFT}
 
-.c.o:		%.o : %.c
-					@gcc ${CFLAGS} ${INCS} -c $< -o $(<:.c=.o)
+ignore: runlibft
+	${CC} ${FLAGS} -o ${NAME} ${SRCS} -I ${INCS} ${LIBFT}
 
-all: 		${PIPEX}
-
-${PIPEX}:	${OBJS}
-					@make re -C ./libft
-					@cc ${OBJS} -Llibft -lft -o ${PIPEX}
+bonus: runlibft 
+	${CC} ${FLAGS} -o ${NAME} ${BSRCS} -I ${INCS} ${LIBFT}
 
 clean:
-					@make clean -C ./libft
-					@rm -f ${OBJS} ${OBJS_B}
+	${RM} ${NAME}
 
-fclean: 	clean
-					@make fclean -C ./libft
-					@rm -f $(PIPEX)
-					@rm -f ${PROG}
+fclean: clean
+	make -C libft fclean
 
-re:			fclean all
+re: fclean all
 
+runlibft:
+	make -C libft
+
+.PHONY: all re clean fclean

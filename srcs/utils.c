@@ -6,11 +6,11 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:50:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/13 18:32:42 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/14 12:07:49 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 // **** FIND PATH (char *cmd, char **envp)
 // iterates trough envp untile finds the string starting with "PATH" (strnstr)
