@@ -16,18 +16,18 @@ ${NAME}: runlibft
 ignore: runlibft
 	${CC} ${FLAGS} -o ${NAME} ${SRCS} -I ${INCS} ${LIBFT}
 
-bonus: runlibft 
-	${CC} ${FLAGS} -o ${NAME} ${BSRCS} -I ${INCS} ${LIBFT}
+#bonus: runlibft 
+#	${CC} ${FLAGS} -o ${NAME} ${BSRCS} -I ${INCS} ${LIBFT}
 
 clean:
-	${RM} ${NAME}
+	make -C libft fclean
 
 fclean: clean
-	make -C libft fclean
+	${RM} ${NAME}
 
 re: fclean all
 
 runlibft:
-	make -C libft
+	make bonus -C libft
 
 .PHONY: all re clean fclean
