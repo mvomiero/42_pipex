@@ -6,18 +6,13 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:50:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/14 17:33:22 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:26:46 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-// **** FIND PATH (char *cmd, char **envp)
-// iterates trough envp untile finds the string starting with "PATH" (strnstr)
-// ft_splits the string starting from + 5 ("PATH="), separator is :
-// once it has the array of strings with all the paths, you have for each add / 
-// and the command name (cmd, passed as argument of the function)
-// if you have access, you return the first path you encounter
+// frees an array of strings
 
 static void	free_array_strings(char **array)
 {
@@ -28,6 +23,13 @@ static void	free_array_strings(char **array)
 		free(array[i++]);
 	free(array);
 }
+
+// **** FIND PATH (char *cmd, char **envp)
+// iterates trough envp untile finds the string starting with "PATH" (strnstr)
+// ft_splits the string starting from + 5 ("PATH="), separator is :
+// once it has the array of strings with all the paths, you have for each add / 
+// and the command name (cmd, passed as argument of the function)
+// if you have access, you return the first path you encounter
 
 char	*find_path(char *cmd, char **envp)
 {
@@ -61,13 +63,8 @@ void	error(void)
 	perror("Error");
 	exit(EXIT_FAILURE);
 }
-// **** EXECUTE (char *argv, char **envp)
-// stores ft_split of argv in array of strings (separator is ' ')
-// stores the parth in a variable after calling the function
-// if there is no path, you have to free the array of strings
-// launch and protect the execve function (if -1 then is error)
 
-// perror, access???
+// emulates the behavior of bash for command not found
 
 static void	cmd_not_found(char **cmd)
 {
@@ -76,6 +73,12 @@ static void	cmd_not_found(char **cmd)
 	free_array_strings(cmd);
 	exit(EXIT_FAILURE);
 }
+
+// **** EXECUTE (char *argv, char **envp)
+// stores ft_split of argv in array of strings (separator is ' ')
+// stores the parth in a variable after calling the function
+// if there is no path, you have to free the array of strings
+// launch and protect the execve function (if -1 then is error)
 
 void	execute(char *argv, char **envp)
 {

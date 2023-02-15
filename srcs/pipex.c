@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:37:10 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/14 17:30:04 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:29:03 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,18 @@ void	child_process(char **argv, char **envp, int *fd)
 	execute(argv[2], envp);
 }
 
+// *** PARENT
+// create a int fd for outfile and open it
+// 		fd opening protection
+// dup2 -> we set fd[0] as STDIN (so in the same time we close fd[0])
+// 		doesen't need to input (write) here, so we can close it
+// dup2 -> we set fd infile as STDOUT
+// 		so the pipe writes from the file we have
+// close fd[0] (was still open)
+//		once you read, you can close it
+// execute function
+// in open() -> O_TRUNC is meant to truncate the file if already eisting
+
 void	parent_process(char **argv, char **envp, int *fd)
 {
 	int	outfile;
@@ -56,21 +68,7 @@ void	parent_process(char **argv, char **envp, int *fd)
 	execute(argv[3], envp);
 }
 
-// *** PARENT
-// create a int fd for outfile and open it
-// 		fd opening protection
-// dup2 -> we set fd[0] as STDIN (so in the same time we close fd[0])
-// 		doesen't need to input (write) here, so we can close it
-// dup2 -> we set fd infile as STDOUT
-// 		so the pipe writes from the file we have
-// close fd[0] (was still open)
-//		once you read, you can close it
-// execute function
-
-// in open() -> O_TRUNC is meant to truncate the file if already eisting
-
 // ***** MAIN
-
 // declare fd, declare pid
 // condition 5 argc
 // call pipe on fd
@@ -79,28 +77,22 @@ void	parent_process(char **argv, char **envp, int *fd)
 // wait for child process
 // execute parent process
 
-
 int	main(int argc, char **argv, char **envp)
 {
 	int		fd[2];
 	pid_t	pid1;
-	
-		//printf("completed\n");
+
 	if (argc == 5)
 	{
-		//printf("ciao\n");
 		if (pipe(fd) == -1)
 			error();
-		//printf("pipe done\n");
 		pid1 = fork();
 		if (pid1 == -1)
 			error();
 		if (pid1 == 0)
 			child_process(argv, envp, fd);
 		waitpid(pid1, NULL, 0);
-		//printf("chil process done\n");
 			parent_process(argv, envp, fd);
-		//printf("parent process done\n");
 	}
 	else
 	{
@@ -108,20 +100,4 @@ int	main(int argc, char **argv, char **envp)
 		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
 	}
 	return (0);
-	// still have to do the else statement
 }
-
-// **** FIND PATH (char *cmd, char **envp)
-// iterates trough envp untile finds the string starting with "PATH" (strnstr)
-// ft_splits the string starting from + 5 ("PATH="), separator is :
-// once it has the array of strings with all the paths, you have for each add / 
-// and the command name (cmd, passed as argument of the function)
-// if you have access, you return the first path you encounter
-
-// **** EXECUTE (char *argv, char **envp)
-// stores ft_split of argv in array of strings (separator is ' ')
-// stores the parth in a variable after calling the function
-// if there is no path, you have to free the array of strings
-// launch and protect the execve function (if -1 then is error)
-
-// perror, access???
