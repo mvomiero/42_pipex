@@ -1,5 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/02/15 11:19:44 by mvomiero          #+#    #+#              #
+#    Updated: 2023/02/15 11:19:48 by mvomiero         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-#BSRCS	= pipex_bonus.c utils_bonus.c
 SRCS	= srcs/pipex.c srcs/utils.c
 BSRCS	= srcs/pipex_bonus.c srcs/utils.c
 OBJS	= ${SRCS:.c=.o}
@@ -58,30 +68,28 @@ test_bash:
 	-< $(INFILE) $(IN_CMD_BA) | $(OUT_CMD_BA) > $(OUTFILE)
 	@cat outfile.txt
 
-test_bonus: test_pipex_b test_bash_b test_pipex_a test_bash_a
+test_bonus: test_pipex_a test_bash_a test_pipex_b test_bash_b 
 
-test_pipex_b:
+test_pipex_a:
 	@touch infile.txt
 	@echo "**** TEST PIPEX ****"
 	-./pipex $(INFILE) $(IN_CMD) "wc -l" $(OUT_CMD) $(OUTFILE)
 	@cat outfile.txt
 
-test_bash_b:
+test_bash_a:
 	@echo "*** TEST BASH ****"
-# - is to ignore if there is an error
 	-< $(INFILE) $(IN_CMD_BA) | wc -l | $(OUT_CMD_BA) > $(OUTFILE)
 	@cat outfile.txt
 
-test_pipex_a:
+test_pipex_b:
 	@touch infile.txt
 	@echo "**** TEST PIPEX ****"
-	-./pipex here_doc $(INFILE) $(IN_CMD) $(OUT_CMD) $(OUTFILE)
+	-./pipex here_doc LIMITER cat wc $(OUTFILE)
 	@cat outfile.txt
 
-test_bash_a:
+test_bash_b:
 	@echo "*** TEST BASH ****"
-# - is to ignore if there is an error
-	-<  $(IN_CMD_BA) << $(INFILE) | $(OUT_CMD_BA) >> $(OUTFILE)
+	-cat << LIMITER | wc >> $(OUTFILE)
 	@cat outfile.txt
 
 .PHONY: all re clean fclean test
