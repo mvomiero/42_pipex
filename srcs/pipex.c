@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:37:10 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/15 12:29:03 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:33:09 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	main(int argc, char **argv, char **envp)
 		if (pid1 == 0)
 			child_process(argv, envp, fd);
 		waitpid(pid1, NULL, 0);
-			parent_process(argv, envp, fd);
+		parent_process(argv, envp, fd);
 	}
 	else
 	{

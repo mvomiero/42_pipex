@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:50:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/15 12:26:46 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:32:00 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,3 @@ void	execute(char *argv, char **envp)
 	if (execve(path, cmd, envp) == -1)
 		error();
 }
-

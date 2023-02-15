@@ -6,12 +6,12 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 11:19:44 by mvomiero          #+#    #+#              #
-#    Updated: 2023/02/15 11:19:48 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/02/15 12:54:18 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	= srcs/pipex.c srcs/utils.c
-BSRCS	= srcs/pipex_bonus.c srcs/utils.c
+BSRCS	= srcs/pipex_bonus.c srcs/utils.c srcs/utils_bonus.c
 OBJS	= ${SRCS:.c=.o}
 BOBJS	= ${BSRCS:.c=.o}
 NAME	= pipex

@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:12:00 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/15 13:02:58 by mvomiero         ###   ########.fr       */
+/*   Created: 2023/02/15 12:46:57 by mvomiero          #+#    #+#             */
+/*   Updated: 2023/02/15 13:05:47 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../includes/pipex.h"
 
-// # include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <string.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-# include "../libft/libft.h"
-
-char	*find_path(char *cmd, char **envp);
-void	error(void);
-void	execute(char *argv, char **envp);
-
-void	use(void);
-void	argc_check(int argc);
-
-#endif
+void	argc_check(int argc)
+{
+	if (argc < 6)
+		use();
+}

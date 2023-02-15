@@ -6,13 +6,13 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:33:40 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/15 12:24:06 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/15 13:04:46 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-static void	use(void)
+void	use(void)
 {
 	ft_putstr_fd("Error: Bad argument\n", 2);
 	ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <...> <file2>\n", 1);
@@ -82,8 +82,7 @@ static void	here_doc(char *limiter, int argc)
 	int		fd[2];
 	char	*line;
 
-	if (argc < 6)
-		use();
+	argc_check(argc);
 	if (pipe(fd) == -1)
 		error();
 	reader = fork();
