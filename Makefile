@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 11:19:44 by mvomiero          #+#    #+#              #
-#    Updated: 2023/02/16 17:20:56 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/02/16 17:55:54 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ test: test_pipex test_bash
 test_pipex:
 	@touch infile.txt
 	@echo "**** TEST PIPEX ****"
-# - is to ignore if there is an error
+# - is to ignore if  there is an error
 	- ${VALGRIND}./pipex $(INFILE) $(IN_CMD) $(OUT_CMD) $(OUTFILE)
 	@cat outfile.txt
 
