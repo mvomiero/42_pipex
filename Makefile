@@ -6,14 +6,12 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 11:19:44 by mvomiero          #+#    #+#              #
-#    Updated: 2023/02/16 17:55:54 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/02/16 18:18:43 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	= srcs/pipex.c srcs/utils.c
-BSRCS	= srcs/pipex_bonus.c srcs/utils.c srcs/utils_bonus.c
 OBJS	= ${SRCS:.c=.o}
-BOBJS	= ${BSRCS:.c=.o}
 NAME	= pipex
 CC	= cc
 FLAGS	= -Wall -Werror -Wextra 
@@ -28,13 +26,9 @@ ${NAME}: $(SRCS)
 	make -C libft
 	${CC} ${FLAGS} -o ${NAME} ${SRCS} -I ${INCS} ${LIBFT}
 
-bonus:
-	make -C libft
-	${CC} ${FLAGS} -o ${NAME} ${BSRCS} -I ${INCS} ${LIBFT}
-
 clean:
 	make -C ./libft fclean
-	rm -f ${OBJS} ${BOBJS}
+	rm -f ${OBJS}
 
 fclean: clean
 	${RM} ${NAME}
@@ -45,13 +39,14 @@ re: fclean all
 
 INFILE	= infile.txt
 OUTFILE	= outfile.txt
-IN_CMD	= "ls -la"
-OUT_CMD	= "wc"
+IN_CMD	= "ciao"
+OUT_CMD	= ""
 IN_CMD_B	= $(IN_CMD:"%=%)
 IN_CMD_BA	= $(IN_CMD_B:%"=%)
-OUT_CMD_B	= $(OUT_CMD:"%=%)
 OUT_CMD_BA	= $(OUT_CMD_B:%"=%)
-VALGRIND = valgrind --leak-check=full --track-fds=yes 
+OUT_CMD_B	= $(OUT_CMD:"%=%)
+VALGRIND = valgrind --leak-check=full 
+#--track-fds=yes 
 
 test: test_pipex test_bash
 
@@ -59,37 +54,14 @@ test_pipex:
 	@touch infile.txt
 	@echo "**** TEST PIPEX ****"
 # - is to ignore if  there is an error
-	- ${VALGRIND}./pipex $(INFILE) $(IN_CMD) $(OUT_CMD) $(OUTFILE)
+#	- ${VALGRIND}
+	- ./pipex $(INFILE) $(IN_CMD) $(OUT_CMD) $(OUTFILE)
 	@cat outfile.txt
 
 test_bash:
 	@echo "*** TEST BASH ****"
 # - is to ignore if there is an error
 	-< $(INFILE) $(IN_CMD_BA) | $(OUT_CMD_BA) > $(OUTFILE)
-	@cat outfile.txt
-
-test_bonus: test_pipex_a test_bash_a test_pipex_b test_bash_b 
-
-test_pipex_a:
-	@touch infile.txt
-	@echo "**** TEST PIPEX ****"
-	-${VALGRIND}./pipex $(INFILE) $(IN_CMD) "wc -l" $(OUT_CMD) $(OUTFILE)
-	@cat outfile.txt
-
-test_bash_a:
-	@echo "*** TEST BASH ****"
-	-< $(INFILE) $(IN_CMD_BA) | wc -l | $(OUT_CMD_BA) > $(OUTFILE)
-	@cat outfile.txt
-
-test_pipex_b:
-	@touch infile.txt
-	@echo "**** TEST PIPEX ****"
-	-${VALGRIND}./pipex here_doc LIMITER cat wc $(OUTFILE)
-	@cat outfile.txt
-
-test_bash_b:
-	@echo "*** TEST BASH ****"
-	-cat << LIMITER | wc >> $(OUTFILE)
 	@cat outfile.txt
 
 .PHONY: all re clean fclean test
