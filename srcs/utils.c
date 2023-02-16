@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:50:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/16 17:17:16 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:26:17 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	cmd_not_found(char **cmd)
 // stores ft_split of argv in array of strings (separator is ' ')
 // stores the parth in a variable after calling the function
 // if there is no path, you have to free the array of strings
-// launch and protect the execve function (if -1 then is error)
+// launch and protect the execve  function (if -1 then is error)
 
 void	execute(char *argv, char **envp)
 {
