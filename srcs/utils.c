@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:50:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/15 12:32:00 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:11:00 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	error(void)
 
 static void	cmd_not_found(char **cmd)
 {
-	write(2, cmd[0], ft_strlen(cmd[0]));
+	if (cmd[0])
+		write(2, cmd[0], ft_strlen(cmd[0]));
 	write(2, ": command not found\n", 20);
 	free_array_strings(cmd);
 	exit(EXIT_FAILURE);
@@ -86,11 +87,11 @@ void	execute(char *argv, char **envp)
 	char	*path;
 
 	cmd = ft_split(argv, ' ');
+	if (!cmd[0])
+		cmd_not_found(cmd);
 	path = find_path(cmd[0], envp);
 	if (!path)
-	{
 		cmd_not_found(cmd);
-	}
 	if (execve(path, cmd, envp) == -1)
 		error();
 }
