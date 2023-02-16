@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 11:19:44 by mvomiero          #+#    #+#              #
-#    Updated: 2023/02/16 12:14:49 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/02/16 17:00:24 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,8 @@ runlibft:
 
 INFILE	= infile.txt
 OUTFILE	= outfile.txt
-IN_CMD	= "ls -l"
-OUT_CMD	= "wc"
+IN_CMD	= "wc"
+OUT_CMD	= "ls"
 IN_CMD_B	= $(IN_CMD:"%=%)
 IN_CMD_BA	= $(IN_CMD_B:%"=%)
 OUT_CMD_B	= $(OUT_CMD:"%=%)
@@ -59,7 +59,7 @@ test_pipex:
 	@touch infile.txt
 	@echo "**** TEST PIPEX ****"
 # - is to ignore if there is an error
-	-./pipex $(INFILE) $(IN_CMD) $(OUT_CMD) $(OUTFILE)
+	-valgrind --leak-check=full ./pipex $(INFILE) $(IN_CMD) ciao $(OUT_CMD) $(OUTFILE)
 	@cat outfile.txt
 
 test_bash:

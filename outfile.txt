@@ -1,0 +1,7 @@
+includes
+infile.txt
+libft
+Makefile
+outfile.txt
+pipex
+srcs
