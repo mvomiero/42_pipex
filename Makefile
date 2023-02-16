@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 11:19:44 by mvomiero          #+#    #+#              #
-#    Updated: 2023/02/16 17:00:24 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/02/16 17:20:56 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,12 @@ LIBFT	= -Llibft -lft
 
 all: ${NAME}
 
-${NAME}: runlibft
+${NAME}: $(SRCS)
+	make -C libft
 	${CC} ${FLAGS} -o ${NAME} ${SRCS} -I ${INCS} ${LIBFT}
 
-bonus: runlibft
+bonus:
+	make -C libft
 	${CC} ${FLAGS} -o ${NAME} ${BSRCS} -I ${INCS} ${LIBFT}
 
 clean:
@@ -39,19 +41,17 @@ fclean: clean
 
 re: fclean all
 
-runlibft:
-	make bonus -C libft
-
 # *** TESTING
 
 INFILE	= infile.txt
 OUTFILE	= outfile.txt
-IN_CMD	= "wc"
-OUT_CMD	= "ls"
+IN_CMD	= "ls -la"
+OUT_CMD	= "wc"
 IN_CMD_B	= $(IN_CMD:"%=%)
 IN_CMD_BA	= $(IN_CMD_B:%"=%)
 OUT_CMD_B	= $(OUT_CMD:"%=%)
 OUT_CMD_BA	= $(OUT_CMD_B:%"=%)
+VALGRIND = valgrind --leak-check=full --track-fds=yes 
 
 test: test_pipex test_bash
 
@@ -59,7 +59,7 @@ test_pipex:
 	@touch infile.txt
 	@echo "**** TEST PIPEX ****"
 # - is to ignore if there is an error
-	-valgrind --leak-check=full ./pipex $(INFILE) $(IN_CMD) ciao $(OUT_CMD) $(OUTFILE)
+	- ${VALGRIND}./pipex $(INFILE) $(IN_CMD) $(OUT_CMD) $(OUTFILE)
 	@cat outfile.txt
 
 test_bash:
@@ -73,7 +73,7 @@ test_bonus: test_pipex_a test_bash_a test_pipex_b test_bash_b
 test_pipex_a:
 	@touch infile.txt
 	@echo "**** TEST PIPEX ****"
-	-./pipex $(INFILE) $(IN_CMD) "wc -l" $(OUT_CMD) $(OUTFILE)
+	-${VALGRIND}./pipex $(INFILE) $(IN_CMD) "wc -l" $(OUT_CMD) $(OUTFILE)
 	@cat outfile.txt
 
 test_bash_a:
@@ -84,7 +84,7 @@ test_bash_a:
 test_pipex_b:
 	@touch infile.txt
 	@echo "**** TEST PIPEX ****"
-	-./pipex here_doc LIMITER cat wc $(OUTFILE)
+	-${VALGRIND}./pipex here_doc LIMITER cat wc $(OUTFILE)
 	@cat outfile.txt
 
 test_bash_b:

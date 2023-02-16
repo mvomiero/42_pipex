@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:50:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/16 16:58:27 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:17:16 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,38 +30,6 @@ static void	free_array_strings(char **array)
 // once it has the array of strings with all the paths, you have for each add / 
 // and the command name (cmd, passed as argument of the function)
 // if you have access, you return the first path you encounter
-
-/* char	*find_path(char *cmd, char **envp)
-{
-	char	**paths;
-	char	*path;
-	int		i;
-
-	i = 0;
-	while (ft_strnstr(envp[i], "PATH", 4) == 0)
-		i++;
-	paths = ft_split(envp[i] + 5, ':');
-	
-	for (int i = 0; paths[i]; i++)
-		printf("\n%s\n\n", paths[i]);
-	//char ** prova = ft_split("ciao marco come va", ' ');
-	i = 0;
-	while (paths[i])
-	{
-		path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(path, cmd);
-		if (access(path, F_OK) == 0)
-		{
-			free_array_strings(paths);
-			return (path);
-		}
-		free(path);
-		i++;
-	}
-	free_array_strings(paths);
-	//free(paths);
-	return (0);
-} */
 
 char	*find_path(char *cmd, char **envp)
 {

@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 17:49:48 by mvomiero          #+#    #+#              #
-#    Updated: 2023/02/14 18:46:30 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/02/16 17:02:51 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,13 +31,13 @@ all:	$(NAME)
 
 $(NAME):
 #$(OBJS)
-	@cc $(FLAGS) -c $(SRCS)
-	@ar rcs $(NAME) $(OBJS)
-
-bonus:
-#$(OBJS) $(BONUS_OBJS)
 	@cc $(FLAGS) -c $(SRCS) $(BONUS)
 	@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+#	@cc $(FLAGS) -c $(SRCS)
+#	@ar rcs $(NAME) $(OBJS)
+
+#bonus:
+#$(OBJS) $(BONUS_OBJS)
 	
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS)

@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:37:10 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/02/16 16:10:22 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:05:10 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	parent_process(char **argv, char **envp, int *fd)
 }
 
 // ***** MAIN
+// ciao ciao
 // declare fd, declare pid
 // condition 5 argc
 // call pipe on fd
