@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 11:19:44 by mvomiero          #+#    #+#              #
-#    Updated: 2023/02/16 18:18:43 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/02/20 12:09:37 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,13 +39,13 @@ re: fclean all
 
 INFILE	= infile.txt
 OUTFILE	= outfile.txt
-IN_CMD	= "ciao"
-OUT_CMD	= ""
+IN_CMD	= "ls -l"
+OUT_CMD	= "cat"
 IN_CMD_B	= $(IN_CMD:"%=%)
 IN_CMD_BA	= $(IN_CMD_B:%"=%)
 OUT_CMD_BA	= $(OUT_CMD_B:%"=%)
 OUT_CMD_B	= $(OUT_CMD:"%=%)
-VALGRIND = valgrind --leak-check=full 
+VALGRIND = valgrind --leak-check=full --track-fds=yes
 #--track-fds=yes 
 
 test: test_pipex test_bash
@@ -55,7 +55,7 @@ test_pipex:
 	@echo "**** TEST PIPEX ****"
 # - is to ignore if  there is an error
 #	- ${VALGRIND}
-	- ./pipex $(INFILE) $(IN_CMD) $(OUT_CMD) $(OUTFILE)
+	-./pipex $(INFILE) $(IN_CMD) $(OUT_CMD) $(OUTFILE)
 	@cat outfile.txt
 
 test_bash:
@@ -63,5 +63,8 @@ test_bash:
 # - is to ignore if there is an error
 	-< $(INFILE) $(IN_CMD_BA) | $(OUT_CMD_BA) > $(OUTFILE)
 	@cat outfile.txt
+
+test_clean:
+	@rm -f infile.txt outfile.txt
 
 .PHONY: all re clean fclean test
